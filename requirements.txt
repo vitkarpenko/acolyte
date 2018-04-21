@@ -1,2 +1,4 @@
 python-twitter
 discord
+beautifulsoup4
+requests
