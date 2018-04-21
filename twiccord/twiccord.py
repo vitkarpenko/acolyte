@@ -62,7 +62,7 @@ class KindleQuotesRedirecter(discord.Client):
         parser = BeautifulSoup(r.text, 'lxml')
         quote = parser.find(id='kp-quote')
         if quote:
-            return quote.string.strip()
+            return quote.string.strip(' \t\n"')
         else:
             return None
 
