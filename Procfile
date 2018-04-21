@@ -1,1 +1,1 @@
-web: export env.sh && ./run.sh
+web: python3 twiccord
