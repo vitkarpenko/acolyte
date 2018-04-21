@@ -90,6 +90,6 @@ class KindleQuotesRedirecter(discord.Client):
         await self._run_periodically(10, self.post_updates_to_discord)
 
 
-if __name__ == '__main__':
+def main():
     redirecter = KindleQuotesRedirecter(TOKENS, 'karpenko_vitaly')
     redirecter.run(TOKENS['BOT_TOKEN'])
