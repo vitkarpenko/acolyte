@@ -17,14 +17,14 @@ TOKENS = dict(
 )
 
 
-class KindleQuotesRedirecter(discord.Client):
+class KindleQuotesRedirecter(commands.Bot):
     """ Periodically checks user's timeline for new tweets with amazon kindle quotes.
     Reposts new quotes to Discord channel.
 
     self.tweets is a list of last fetched tweets.
     """
     def __init__(self, tokens, username):
-        super().__init__()
+        super().__init__(command_prefix='!', description="За Кейли, двигатель и новый способ атомного бражения.")
         self.loop = asyncio.get_event_loop()
         self.twitter = twitter.Api(
             consumer_key=tokens['CONSUMER_KEY'],
@@ -34,11 +34,6 @@ class KindleQuotesRedirecter(discord.Client):
         )
         self.username = username
         self.tweets = self.fetch_latest_tweets()
-        self.bot = commands.Bot(
-            command_prefix='!',
-            description="За Кейли, двигатель и новый способ атомного бражения."
-        )
-
 
 
     def fetch_updates_ids(self):
