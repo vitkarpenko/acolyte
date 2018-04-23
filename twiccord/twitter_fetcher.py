@@ -13,8 +13,8 @@ class TwitterFetcher:
             access_token_key=os.getenv('TWICCORD_TWITTER_ACCESS_TOKEN_KEY'),
             access_token_secret=os.getenv('TWICCORD_TWITTER_ACCESS_TOKEN_SECRET')
         )
-        self.tweets = list()
         self.username = 'karpenko_vitaly'
+        self.tweets = self.fetch_latest_tweets()
 
 
     def fetch_updates_ids(self):

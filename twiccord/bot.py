@@ -30,15 +30,14 @@ async def on_ready():
     await run_periodically(10, post_updates_to_discord)
 
 
-@commands.command()
-async def roll(dice):
+@bot.command(pass_context=True)
+async def roll(ctx, dice):
     try:
         rolls, limit = map(int, dice.split('d'))
     except Exception:
         await bot.say('**XdY**, просил же!')
     rolls = [random.randint(1, limit) for r in range(rolls)]
     comma_separated_rolls = ', '.join(str(roll) for roll in rolls)
-    return bot.say(f'**Выпало**: {comma_separated_rolls}\n**Сумма**: {sum(rolls)}')
+    await bot.say(f'**Выпало**: {comma_separated_rolls}\n**Сумма**: {sum(rolls)}')
 
 bot.event(on_ready)
-bot.add_command(roll)
