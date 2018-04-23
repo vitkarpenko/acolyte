@@ -1,1 +1,1 @@
-worker: python3 twiccord
+worker: python3 main.py
