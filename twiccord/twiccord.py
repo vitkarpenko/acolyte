@@ -8,8 +8,6 @@ from discord.ext import commands
 import twitter
 import requests
 
-from commands import roll
-
 TOKENS = dict(
     CONSUMER_KEY=os.getenv('TWICCORD_TWITTER_CONSUMER_KEY'),
     CONSUMER_SECRET=os.getenv('TWICCORD_TWITTER_CONSUMER_SECRET'),
@@ -93,6 +91,18 @@ class KindleQuotesRedirecter(commands.Bot):
 
     async def on_ready(self):
         await self._run_periodically(10, self.post_updates_to_discord)
+
+
+@commands.command()
+async def roll(dice):
+    global redirecter
+    try:
+        rolls, limit = map(int, dice.split('d'))
+    except Exception:
+        await redirecter.say('**XdY**, просил же!')
+    rolls = [random.randint(1, limit) for r in range(rolls)]
+    comma_separated_rolls = ', '.join(str(roll) for roll in rolls)
+    return redirecter.say(f'**Выпало**: {comma_separated_rolls}\n**Сумма**: {sum(rolls)}')
 
 
 def main():
