@@ -104,7 +104,8 @@ class KindleQuotesRedirecter(discord.Client):
         except Exception:
             await self.bot.say('**XdY**, просил же!')
         rolls = [random.randint(1, limit) for r in range(rolls)]
-        return self.bot.say(f'**Выпало**: {', '.join(str(roll) for roll in rolls)}\n**Сумма**: {sum(rolls)}')
+        comma_separated_rolls = ', '.join(str(roll) for roll in rolls)
+        return self.bot.say(f'**Выпало**: {comma_separated_rolls}\n**Сумма**: {sum(rolls)}')
 
 
 def main():
