@@ -106,5 +106,5 @@ class KindleQuotesRedirecter(commands.Bot):
 
 def main():
     redirecter = KindleQuotesRedirecter(TOKENS, 'karpenko_vitaly')
-    redirecter.add_command(roll)
+    redirecter.add_command(redirecter.roll)
     redirecter.run(TOKENS['BOT_TOKEN'])
