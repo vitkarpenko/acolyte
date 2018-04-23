@@ -1,8 +1,10 @@
 import asyncio
 import os
+import random
 
 from bs4 import BeautifulSoup
 import discord
+from discord.ext import commands
 import twitter
 import requests
 
@@ -32,6 +34,12 @@ class KindleQuotesRedirecter(discord.Client):
         )
         self.username = username
         self.tweets = self.fetch_latest_tweets()
+        self.bot = commands.Bot(
+            command_prefix='!',
+            description="За Кейли, двигатель и новый способ атомного бражения."
+        )
+
+
 
     def fetch_updates_ids(self):
         """ Получает последние твиты, записывает их в self.tweets
@@ -88,6 +96,15 @@ class KindleQuotesRedirecter(discord.Client):
 
     async def on_ready(self):
         await self._run_periodically(10, self.post_updates_to_discord)
+
+    @commands.command(description="Кину кубик в формате XdY")
+    async def roll(self, dice):
+        try:
+            rolls, limit = map(int, dice.split('d'))
+        except Exception:
+            await self.bot.say('**XdY**, просил же!')
+        rolls = [random.randint(1, limit) for r in range(rolls)]
+        return self.bot.say(f'**Выпало**: {', '.join(str(roll) for roll in rolls)}\n**Сумма**: {sum(rolls)}')
 
 
 def main():
