@@ -8,7 +8,7 @@ from discord.ext import commands
 import twitter
 import requests
 
-from twiccord.commands import roll
+from commands import roll
 
 TOKENS = dict(
     CONSUMER_KEY=os.getenv('TWICCORD_TWITTER_CONSUMER_KEY'),
