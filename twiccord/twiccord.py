@@ -92,19 +92,19 @@ class KindleQuotesRedirecter(commands.Bot):
     async def on_ready(self):
         await self._run_periodically(10, self.post_updates_to_discord)
 
-    @commands.command()
-    async def roll(self, dice):
-        global redirecter
-        try:
-            rolls, limit = map(int, dice.split('d'))
-        except Exception:
-            await self.say('**XdY**, просил же!')
-        rolls = [random.randint(1, limit) for r in range(rolls)]
-        comma_separated_rolls = ', '.join(str(roll) for roll in rolls)
-        return self.say(f'**Выпало**: {comma_separated_rolls}\n**Сумма**: {sum(rolls)}')
+
+@commands.command(pass_context=True)
+async def roll(ctx, dice):
+    try:
+        rolls, limit = map(int, dice.split('d'))
+    except Exception:
+        await ctx.bot.say('**XdY**, просил же!')
+    rolls = [random.randint(1, limit) for r in range(rolls)]
+    comma_separated_rolls = ', '.join(str(roll) for roll in rolls)
+    return ctx.bot.say(f'**Выпало**: {comma_separated_rolls}\n**Сумма**: {sum(rolls)}')
 
 
 def main():
     redirecter = KindleQuotesRedirecter(TOKENS, 'karpenko_vitaly')
-    redirecter.add_command(redirecter.roll)
+    redirecter.add_command(roll)
     redirecter.run(TOKENS['BOT_TOKEN'])
