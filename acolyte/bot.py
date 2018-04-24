@@ -6,7 +6,8 @@ import random
 from discord.ext import commands
 from .utils import (
     start_background_tasks,
-    format_quote
+    format_quote,
+    is_night
 )
 from .twitter_quoter import TwitterQuoter
 
@@ -29,6 +30,8 @@ FLOOD = bot.get_channel('405287350734815233')
 Events.
 """
 async def post_updates_to_discord():
+    if is_night():
+        return
     updates_ids = twitter.fetch_updates_ids()
     updates = (tweet for tweet in twitter.tweets if tweet.id in updates_ids)
     for update in updates:
