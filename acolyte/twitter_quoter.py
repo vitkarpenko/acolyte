@@ -8,10 +8,10 @@ from bs4 import BeautifulSoup
 class TwitterQuoter:
     def __init__(self):
         self.twitter = twitter.Api(
-            consumer_key=os.getenv('TWICCORD_TWITTER_CONSUMER_KEY'),
-            consumer_secret=os.getenv('TWICCORD_TWITTER_CONSUMER_SECRET'),
-            access_token_key=os.getenv('TWICCORD_TWITTER_ACCESS_TOKEN_KEY'),
-            access_token_secret=os.getenv('TWICCORD_TWITTER_ACCESS_TOKEN_SECRET')
+            consumer_key=os.getenv('ACOLYTE_TWITTER_CONSUMER_KEY'),
+            consumer_secret=os.getenv('ACOLYTE_TWITTER_CONSUMER_SECRET'),
+            access_token_key=os.getenv('ACOLYTE_TWITTER_ACCESS_TOKEN_KEY'),
+            access_token_secret=os.getenv('ACOLYTE_TWITTER_ACCESS_TOKEN_SECRET')
         )
         self.username = 'karpenko_vitaly'
         self.tweets = self.fetch_latest_tweets()
