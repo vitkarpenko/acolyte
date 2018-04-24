@@ -7,10 +7,6 @@ from .utils import (
     format_quote
 )
 from .twitter_fetcher import TwitterFetcher
-from commands import (
-    roll,
-    choice
-)
 
 bot = commands.Bot(
     command_prefix='!',
@@ -20,6 +16,9 @@ bot = commands.Bot(
 twitter = TwitterFetcher()
 
 
+"""
+Events.
+"""
 async def post_updates_to_discord():
     books = bot.get_channel('405339907012427779')
     updates_ids = twitter.fetch_updates_ids()
@@ -36,11 +35,36 @@ async def post_updates_to_discord():
 async def on_ready():
     await run_periodically(10, post_updates_to_discord)
 
+
 bot.event(on_ready)
 
-bot.command(
-    description='This is how I roll... *XdY*.'
-)(roll)
-bot.command(
-    description='Помощь нерешительным!'
-)(choice)
+
+"""
+Commands.
+"""
+async def roll(dice):
+    try:
+        rolls, limit = map(int, dice.split('d'))
+    except Exception:
+        await bot.say('**XdY**, просил же!')
+    if rolls > 200:
+        await bot.say('У меня нет столько кубиков.')
+    if rolls * limit > 1000000:
+        await bot.say('Так, экспериментатор, зачехляй свой коллайдер!')
+    rolls = [random.randint(1, limit) for r in range(rolls)]
+    comma_separated_rolls = ', '.join(str(roll) for roll in rolls)
+    await bot.say(f'**Выпало**: {comma_separated_rolls}\n**Сумма**: {sum(rolls)}')
+
+
+async def choice(*args):
+    await bot.say(f'**Выбрано**: {random.choice(args)}')
+
+bot.command(description='This is how I roll... *XdY*.')(roll)
+bot.command(description='Помощь нерешительным!')(choice)
+
+
+"""
+Cogs.
+"""
+
+bot.load_extension('polls')

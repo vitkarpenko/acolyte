@@ -1,6 +1,6 @@
 import os
 
-from twiccord import bot
+from twiccord.bot import bot
 
 
 if __name__ == '__main__':
