@@ -67,4 +67,4 @@ bot.command(description='Помощь нерешительным!')(choice)
 Cogs.
 """
 
-bot.load_extension('polls')
+bot.load_extension('twiccord.polls')
