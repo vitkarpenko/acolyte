@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-class TwitterFetcher:
+class TwitterQuoter:
     def __init__(self):
         self.twitter = twitter.Api(
             consumer_key=os.getenv('TWICCORD_TWITTER_CONSUMER_KEY'),

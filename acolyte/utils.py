@@ -1,9 +1,10 @@
 import asyncio
 
 
-async def run_periodically(period, method):
+async def start_background_tasks(tasks, period=10):
     while True:
-        await method()
+        for task in tasks:
+            await task
         await asyncio.sleep(period)
 
 def format_quote(quote):
