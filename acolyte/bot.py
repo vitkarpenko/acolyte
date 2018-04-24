@@ -22,8 +22,8 @@ current_file = os.path.dirname(os.path.abspath(__file__))
 with open(Path(current_file).parent / 'data' / 'quotes.txt') as quotes_file:
     QUOTES = [quote.strip() for quote in quotes_file]
 
-BOOKS = bot.get_channel('405339907012427779')
-FLOOD = bot.get_channel('405287350734815233')
+BOOKS_ID = '405339907012427779'
+FLOOD_ID = '405287350734815233'
 
 
 """
@@ -36,7 +36,7 @@ async def post_updates_to_discord():
         quote = twitter.find_kindle_quotes(update)
         if quote:
             await bot.send_message(
-                BOOKS,
+                bot.get_channel(BOOKS_ID),
                 format_quote(quote)
             )
 
@@ -47,7 +47,7 @@ async def post_quotes():
     cant_hold_it = random.randint(0, 360) // 360
     if cant_hold_it:
         bot.send_message(
-            FLOOD,
+            bot.get_channel(FLOOD_ID),
             f'*{random.choice(QUOTES)}*'
         )
 
@@ -55,8 +55,8 @@ async def post_quotes():
 @bot.event
 async def on_ready():
     bot.send_message(
-        FLOOD,
-        f'***Я переродился!***'
+        bot.get_channel(FLOOD_ID),
+        f'**Я переродился!**'
     )
     await start_background_tasks([post_updates_to_discord, post_quotes])
 
