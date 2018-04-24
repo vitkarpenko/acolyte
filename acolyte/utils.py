@@ -4,7 +4,7 @@ import asyncio
 async def start_background_tasks(tasks, period=10):
     while True:
         for task in tasks:
-            await task
+            await task()
         await asyncio.sleep(period)
 
 def format_quote(quote):

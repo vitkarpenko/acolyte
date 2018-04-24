@@ -61,7 +61,7 @@ class QuickPoll:
 
         results = sorted(tally.items(), key=operator.itemgetter(1), reverse=True)
         output = 'Результаты голосования "{}":\n'.format(embed['title']) + \
-                 '\n'.join(['**{}**: {}'.format(result[0], '\u1F4A0'*result[1]) for result in results])
+                 '\n'.join(['**{}**: {}'.format(result[0], '\U0001F4A0'*result[1]) for result in results])
         await self.bot.say(output)
 
 
