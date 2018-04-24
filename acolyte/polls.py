@@ -1,3 +1,5 @@
+import operator
+
 import discord
 from discord.ext import commands
 
@@ -29,7 +31,7 @@ class QuickPoll:
         react_message = await self.bot.say(embed=embed)
         for reaction in reactions[:len(options)]:
             await self.bot.add_reaction(react_message, reaction)
-        embed.set_footer(text='ID голосовалки: {}'.format(react_message.id))
+        embed.set_footer(text='ID голосования: {}'.format(react_message.id))
         await self.bot.edit_message(react_message, embed=embed)
 
     @commands.command(pass_context=True)
@@ -40,25 +42,26 @@ class QuickPoll:
         embed = poll_message.embeds[0]
         if poll_message.author != ctx.message.server.me:
             return
-        if not embed['footer']['text'].startswith('ID голосовалки:'):
+        if not embed['footer']['text'].startswith('ID голосования:'):
             return
         unformatted_options = [x.strip() for x in embed['description'].split('\n')]
-        opt_dict = {x[:2]: x[3:] for x in unformatted_options} if unformatted_options[0][0] == '1' \
+        options = {x[:2]: x[3:] for x in unformatted_options} if unformatted_options[0][0] == '1' \
             else {x[:1]: x[2:] for x in unformatted_options}
         # check if we're using numbers for the poll, or x/checkmark, parse accordingly
         voters = [ctx.message.server.me.id]  # add the bot's ID to the list of voters to exclude it's votes
 
-        tally = {x: 0 for x in opt_dict.keys()}
+        tally = {x: 0 for x in options.keys()}
         for reaction in poll_message.reactions:
-            if reaction.emoji in opt_dict.keys():
+            if reaction.emoji in options.keys():
                 reactors = await self.bot.get_reaction_users(reaction)
                 for reactor in reactors:
                     if reactor.id not in voters:
                         tally[reaction.emoji] += 1
                         voters.append(reactor.id)
 
-        output = 'Результаты голосовалки "{}":\n'.format(embed['title']) + \
-                 '\n'.join(['**{}**:\t{}'.format(opt_dict[key], tally[key]) for key in tally.keys()])
+        results = sorted(options.items(), key=operator.itemgetter(1), reverse=True)
+        output = 'Результаты голосования "{}":\n'.format(embed['title']) + \
+                 '\n'.join(['**{}**: {}'.format(result[0], '\u1F4A0'*result[1]) for result in results])
         await self.bot.say(output)
 
 
