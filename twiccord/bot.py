@@ -2,12 +2,19 @@ import asyncio
 import random
 
 from discord.ext import commands
-from .utils import run_periodically, format_quote
+from .utils import (
+    run_periodically,
+    format_quote
+)
 from .twitter_fetcher import TwitterFetcher
+from commands import (
+    roll,
+    choice
+)
 
 bot = commands.Bot(
     command_prefix='!',
-    description="За Кейли, двигатель и новый способ атомного бражения."
+    description="За Кейли, двигатель и новый способ атомного бражения!"
 )
 
 twitter = TwitterFetcher()
@@ -29,20 +36,11 @@ async def post_updates_to_discord():
 async def on_ready():
     await run_periodically(10, post_updates_to_discord)
 
-
-@bot.command()
-async def roll(dice):
-    try:
-        rolls, limit = map(int, dice.split('d'))
-    except Exception:
-        await bot.say('**XdY**, просил же!')
-    rolls = [random.randint(1, limit) for r in range(rolls)]
-    comma_separated_rolls = ', '.join(str(roll) for roll in rolls)
-    await bot.say(f'**Выпало**: {comma_separated_rolls}\n**Сумма**: {sum(rolls)}')
-
-
-@bot.command()
-async def choice(*args):
-    await bot.say(f'**Выбрано**: {random.choice(args)}')
-
 bot.event(on_ready)
+
+bot.command(
+    description='This is how I roll... *XdY*.'
+)(roll)
+bot.command(
+    description='Помощь нерешительным!'
+)(choice)
