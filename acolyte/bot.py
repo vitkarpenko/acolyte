@@ -46,7 +46,7 @@ async def post_quotes():
         return
     cant_hold_it = random.randint(0, 360) // 360
     if cant_hold_it:
-        bot.send_message(
+        await bot.send_message(
             bot.get_channel(FLOOD_ID),
             f'*{random.choice(QUOTES)}*'
         )
@@ -54,7 +54,7 @@ async def post_quotes():
 
 @bot.event
 async def on_ready():
-    bot.send_message(
+    await bot.send_message(
         bot.get_channel(FLOOD_ID),
         f'**Я переродился!**'
     )
