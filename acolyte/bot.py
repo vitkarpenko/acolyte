@@ -91,3 +91,4 @@ async def choice(*args):
 Cogs.
 """
 bot.load_extension('acolyte.polls')
+#bot.load_extension('acolyte.haikus')

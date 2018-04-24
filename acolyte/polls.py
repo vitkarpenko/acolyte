@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 
 
-class QuickPoll:
+class Poll:
     """Создание голосовалок."""
 
     def __init__(self, bot):
@@ -66,4 +66,4 @@ class QuickPoll:
 
 
 def setup(bot):
-    bot.add_cog(QuickPoll(bot))
+    bot.add_cog(Poll(bot))
