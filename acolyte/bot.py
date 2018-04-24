@@ -7,7 +7,7 @@ from .utils import (
     start_background_tasks,
     format_quote
 )
-from .twitter_quoter import TwitterFetcher
+from .twitter_quoter import TwitterQuoter
 
 bot = commands.Bot(
     command_prefix='!',
