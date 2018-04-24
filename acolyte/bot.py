@@ -1,4 +1,5 @@
 import asyncio
+import os
 from pathlib import Path
 import random
 
@@ -16,7 +17,8 @@ bot = commands.Bot(
 
 twitter = TwitterQuoter()
 
-with open(Path.cwd().parent / 'data' / 'quotes.txt') as quotes_file:
+current_file = os.path.dirname(os.path.abspath(__file__))
+with open(Path(current_file).parent / 'data' / 'quotes.txt') as quotes_file:
     QUOTES = [quote.strip() for quote in quotes_file]
 
 BOOKS = bot.get_channel('405339907012427779')
