@@ -1,6 +1,6 @@
 import os
 
-from twiccord.bot import bot
+from acolyte.bot import bot
 
 
 if __name__ == '__main__':

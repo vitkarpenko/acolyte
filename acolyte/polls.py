@@ -24,7 +24,7 @@ class QuickPoll:
 
         description = []
         for x, option in enumerate(options):
-            description += '\n {} {}'.format(reactions[x], option)
+            description += '\n{} {}'.format(reactions[x], option)
         embed = discord.Embed(title=question, description=''.join(description))
         react_message = await self.bot.say(embed=embed)
         for reaction in reactions[:len(options)]:

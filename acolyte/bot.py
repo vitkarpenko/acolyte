@@ -39,7 +39,7 @@ async def post_updates_to_discord():
 
 
 async def post_quotes():
-    cant_hold_it = random.randint(0, 480) // 480
+    cant_hold_it = random.randint(0, 360) // 360
     if cant_hold_it:
         bot.send_message(
             FLOOD,
