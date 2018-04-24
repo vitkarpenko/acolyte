@@ -58,7 +58,7 @@ class QuickPoll:
                         voters.append(reactor.id)
 
         output = 'Результаты голосовалки "{}":\n'.format(embed['title']) + \
-                 '\n'.join(['{}: {}'.format(opt_dict[key], tally[key]) for key in tally.keys()])
+                 '\n'.join(['**{}**:\t{}'.format(opt_dict[key], tally[key]) for key in tally.keys()])
         await self.bot.say(output)
 
 
