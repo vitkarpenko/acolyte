@@ -30,8 +30,6 @@ FLOOD = bot.get_channel('405287350734815233')
 Events.
 """
 async def post_updates_to_discord():
-    if is_night():
-        return
     updates_ids = twitter.fetch_updates_ids()
     updates = (tweet for tweet in twitter.tweets if tweet.id in updates_ids)
     for update in updates:
@@ -44,6 +42,8 @@ async def post_updates_to_discord():
 
 
 async def post_quotes():
+    if is_night():
+        return
     cant_hold_it = random.randint(0, 360) // 360
     if cant_hold_it:
         bot.send_message(
@@ -54,6 +54,10 @@ async def post_quotes():
 
 @bot.event
 async def on_ready():
+    bot.send_message(
+        FLOOD,
+        f'***Я переродился!***'
+    )
     await start_background_tasks([post_updates_to_discord, post_quotes])
 
 
