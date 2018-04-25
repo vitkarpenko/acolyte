@@ -47,7 +47,6 @@ class Haiku:
         while self.words:
             word = self.words.popleft()
             passed_words.append(word)
-            print(self.count_syllables(word))
             passed_syllables += self.count_syllables(word)
             if passed_syllables > length:
                 raise BadStructureError
