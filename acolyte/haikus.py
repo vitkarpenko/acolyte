@@ -16,7 +16,7 @@ class Haiku:
 
     async def on_message(self, message):
         text = message.content
-        self.words = deque(text.split())
+        self.words = deque(text.replace('\n', ' ').split())
         lines = self.format_haiku()
         if lines:
             embed = discord.Embed(
