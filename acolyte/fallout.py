@@ -19,14 +19,14 @@ class Fallout:
             self.model = markovify.NewlineText(fallout_phrases.read())
 
     async def on_message(self, message):
-        #cant_hold_it = random.randint(0, 100) // 100
-        #if cant_hold_it:
-        phrase = self.model.make_sentence()
-        phrase = phrase[0].lower() + phrase[1:]
-        await self.bot.send_message(
-            message.channel,
-            f'{message.author.mention}, {phrase}'
-        )
+        cant_hold_it = random.randint(0, 100) // 100
+        if cant_hold_it:
+            phrase = self.model.make_sentence()
+            phrase = phrase[0].lower() + phrase[1:]
+            await self.bot.send_message(
+                message.channel,
+                f'{message.author.mention}, {phrase}'
+            )
 
 def setup(bot):
     bot.add_cog(Fallout(bot))
