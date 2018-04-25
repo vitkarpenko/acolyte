@@ -35,7 +35,7 @@ class Haiku:
             return False
 
     def count_syllables(self, word):
-        return sum(char in self.vowels for char in word) or 1
+        return sum(char in self.vowels for char in word)
 
     def structure(self, *lengths):
         return [
