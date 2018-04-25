@@ -23,7 +23,10 @@ class Haiku:
                 title='О, смотрю, ты человек искусства? Сочиняешь хайку?',
                 description=''.join(lines)
             )
-            await self.bot.say(embed=embed)
+            await self.bot.say(
+                message.channel,
+                embed=embed
+            )
 
     def format_haiku(self):
         try:
