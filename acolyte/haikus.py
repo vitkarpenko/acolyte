@@ -47,11 +47,12 @@ class Haiku:
         while self.words:
             word = self.words.popleft()
             passed_words.append(word)
+            print(self.count_syllables(word))
             passed_syllables += self.count_syllables(word)
             if passed_syllables > length:
                 raise BadStructureError
             elif passed_syllables == length:
-                return passed_words + ['\n']
+                return ' '.join(passed_words) + '\n'
         if passed_syllables < length:
             raise BadStructureError
 
