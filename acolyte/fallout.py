@@ -21,11 +21,11 @@ class Fallout:
     async def on_message(self, message):
         #cant_hold_it = random.randint(0, 100) // 100
         #if cant_hold_it:
-        message = self.model.make_sentence()
-        message = message[0].lower() + message[1:]
+        phrase = self.model.make_sentence()
+        phrase = phrase[0].lower() + phrase[1:]
         await self.bot.send_message(
             message.channel,
-            f'{message.author.mention}, {message}'
+            f'{message.author.mention}, {phrase}'
         )
 
 def setup(bot):
