@@ -102,3 +102,6 @@ ENV/
 
 # env_variables
 env.sh
+
+# vscode
+.vscode

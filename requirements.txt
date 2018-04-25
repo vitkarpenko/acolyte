@@ -3,3 +3,4 @@ discord
 beautifulsoup4
 requests
 lxml
+markovify
