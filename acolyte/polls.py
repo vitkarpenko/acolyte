@@ -13,7 +13,7 @@ class Poll:
     @commands.command(pass_context=True)
     async def poll(self, ctx, question, *options: str):
         if len(options) <= 1:
-            await self.bot.say('Экзистенциальные голосования не принимаются.')
+            await self.bot.say('Пустые голосования не принимаются.')
             return
         if len(options) > 9:
             await self.bot.say('Давай ограничимся девятью вариантами.')

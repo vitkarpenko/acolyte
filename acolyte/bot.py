@@ -54,10 +54,6 @@ async def post_quotes():
 
 @bot.event
 async def on_ready():
-    await bot.send_message(
-        bot.get_channel(FLOOD_ID),
-        f'**Я переродился!**'
-    )
     await start_background_tasks([post_updates_to_discord, post_quotes])
 
 
