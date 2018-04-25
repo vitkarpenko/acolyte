@@ -16,7 +16,7 @@ class Haiku:
 
     async def on_message(self, message):
         text = message.content
-        self.words = deque(text.split())
+        self.words = deque(text.replace('\n', ' ').split())
         lines = self.format_haiku()
         if lines:
             embed = discord.Embed(
@@ -35,7 +35,7 @@ class Haiku:
             return False
 
     def count_syllables(self, word):
-        return sum(char in self.vowels for char in word)
+        return sum(char in self.vowels for char in word.lower())
 
     def structure(self, *lengths):
         return [
