@@ -23,8 +23,9 @@ class Haiku:
                 title='О, смотрю, ты человек искусства? Сочиняешь хайку?',
                 description=''.join(lines)
             )
-            await self.bot.say(
-                message.channel,
+            channel = message.channel
+            await self.bot.send_message(
+                channel,
                 embed=embed
             )
 
