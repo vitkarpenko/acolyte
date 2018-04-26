@@ -16,7 +16,7 @@ class Fallout:
         self.bot = bot
         current_file = os.path.dirname(os.path.abspath(__file__))
         with open(Path(current_file).parent / 'data' / 'fallout.txt') as fallout_phrases:
-            self.model = markovify.NewlineText(fallout_phrases.read())
+            self.model = markovify.NewlineText(fallout_phrases.read(), state_size=3)
 
     async def on_message(self, message):
         cant_hold_it = random.randint(0, 100) // 100
