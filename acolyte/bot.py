@@ -44,7 +44,7 @@ async def post_updates_to_discord():
 async def post_quotes():
     if is_night():
         return
-    cant_hold_it = random.randint(0, 360) // 360
+    cant_hold_it = random.randint(0, 7200) // 7200
     if cant_hold_it:
         await bot.send_message(
             bot.get_channel(FLOOD_ID),
