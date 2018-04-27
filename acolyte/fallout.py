@@ -19,7 +19,7 @@ class Fallout:
             self.model = markovify.NewlineText(fallout_phrases.read(), state_size=3)
 
     async def on_message(self, message):
-        cant_hold_it = random.randint(0, 100) // 100
+        cant_hold_it = random.randint(0, 50) // 50
         if cant_hold_it:
             phrase = self.model.make_sentence()
             phrase = phrase[0].lower() + phrase[1:]
