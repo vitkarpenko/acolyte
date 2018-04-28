@@ -87,4 +87,4 @@ async def choice(*args):
 Cogs.
 """
 bot.load_extension('acolyte.polls')
-bot.load_extension('acolyte.fallout')
+bot.load_extension('acolyte.markov')
