@@ -30,8 +30,7 @@ class Markov:
         )
 
     async def on_message(self, message):
-        cant_hold_it = random.randint(0, 50) // 50
-        if cant_hold_it or self.bot.user.mentioned_in(message):
+        if self.bot.user.mentioned_in(message):
             phrase = self.model.make_sentence()
             while not phrase:
                 phrase = self.model.make_sentence()
