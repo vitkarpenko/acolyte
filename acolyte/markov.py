@@ -11,8 +11,12 @@ class Markov:
     def __init__(self, bot):
         self.bot = bot
         current_file = os.path.dirname(os.path.abspath(__file__))
-        with open(Path(current_file).parent / 'data' / 'sharpe.txt') as sharpe:
-            self.model = markovify.NewlineText(sharpe.read(), state_size=3)
+        with \
+                open(Path(current_file).parent / 'data' / 'sharpe.txt') as sharpe, \
+                open(Path(current_file).parent / 'data' / 'fallout.txt') as fallout, \
+                open(Path(current_file).parent / 'data' / 'eterna.txt') as eterna:
+            data = sharpe.read() + fallout.read() + eterna.read()
+            self.model = markovify.NewlineText(data, state_size=3)
 
     async def on_message(self, message):
         cant_hold_it = random.randint(0, 50) // 50
