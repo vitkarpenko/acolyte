@@ -18,6 +18,17 @@ class Markov:
             data = sharpe.read() + fallout.read() + eterna.read()
             self.model = markovify.NewlineText(data, state_size=3)
 
+        with open(Path(current_file).parent / 'data' / 'sharpe.txt') as sharpe:
+            sharpe_model = markovify.NewlineText(sharpe, state_size=3)
+        with open(Path(current_file).parent / 'data' / 'fallout.txt') as fallout:
+            fallout_model = markovify.NewlineText(fallout, state_size=3)
+        with open(Path(current_file).parent / 'data' / 'eterna.txt') as eterna:
+            eterna_model = markovify.NewlineText(eterna, state_size=3)
+        self.model = markovify.combine(
+            [sharpe_model, fallout_model, eterna_model],
+            [1, 1, 1]
+        )
+
     async def on_message(self, message):
         cant_hold_it = random.randint(0, 50) // 50
         if cant_hold_it or self.bot.user.mentioned_in(message):
