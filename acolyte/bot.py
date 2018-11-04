@@ -92,7 +92,8 @@ async def links():
 
 @bot.command(description='издевательство над людьми')
 async def leet(*args):
-    word = "".join([leet_translate(letter) for letter in ' '.join(args).lower()])
+    original_phrase = ' '.join(args).lower()
+    translated_phrase = "".join([leet_translate(letter) for letter in original_phrase])
     await bot.say(f'`{word}`')
 
 
