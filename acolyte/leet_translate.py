@@ -1,6 +1,6 @@
-def leet_translate(word):
+def translate_letter_to_leet(letter):
     try:
-        in_leet = {
+        letters_to_leet = {
             'а': '/-\\',
             'б': '6',
             'в': '|3',
@@ -61,7 +61,7 @@ def leet_translate(word):
             'y': '`/',
             'z': '(\)',
         }
-        return in_leet[word]
+        return letters_to_leet[letter]
 
     except Exception:
         return word
