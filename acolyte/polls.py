@@ -29,7 +29,7 @@ class Poll:
             description += '\n{} {}'.format(reactions[x], option)
         embed = discord.Embed(title=question, description=''.join(description))
         react_message = await self.bot.say(embed=embed)
-        for reaction in reactions[:len(options)]:
+        for reaction in reactions[: len(options)]:
             await self.bot.add_reaction(react_message, reaction)
         embed.set_footer(text='ID голосования: {}'.format(react_message.id))
         await self.bot.edit_message(react_message, embed=embed)
@@ -45,10 +45,15 @@ class Poll:
         if not embed['footer']['text'].startswith('ID голосования:'):
             return
         unformatted_options = [x.strip() for x in embed['description'].split('\n')]
-        options = {x[:2]: x[3:] for x in unformatted_options} if unformatted_options[0][0] == '1' \
+        options = (
+            {x[:2]: x[3:] for x in unformatted_options}
+            if unformatted_options[0][0] == '1'
             else {x[:1]: x[2:] for x in unformatted_options}
+        )
         # check if we're using numbers for the poll, or x/checkmark, parse accordingly
-        voters = [ctx.message.server.me.id]  # add the bot's ID to the list of voters to exclude it's votes
+        voters = [
+            ctx.message.server.me.id
+        ]  # add the bot's ID to the list of voters to exclude it's votes
 
         tally = {x: 0 for x in options.keys()}
         for reaction in poll_message.reactions:
@@ -60,8 +65,12 @@ class Poll:
                         voters.append(reactor.id)
 
         results = sorted(tally.items(), key=operator.itemgetter(1), reverse=True)
-        output = 'Результаты голосования "{}":\n'.format(embed['title']) + \
-                 '\n'.join(['**{}**: {}'.format(result[0], '\U0001F4A0'*result[1]) for result in results])
+        output = 'Результаты голосования "{}":\n'.format(embed['title']) + '\n'.join(
+            [
+                '**{}**: {}'.format(result[0], '\U0001F4A0' * result[1])
+                for result in results
+            ]
+        )
         await self.bot.say(output)
 
 
