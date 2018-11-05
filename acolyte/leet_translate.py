@@ -1,6 +1,5 @@
 def translate_letter_to_leet(letter):
-    try:
-        letters_to_leet = {
+    letters_to_leet = {
             'а': '/-\\',
             'б': '6',
             'в': '|3',
@@ -61,10 +60,8 @@ def translate_letter_to_leet(letter):
             'y': '`/',
             'z': '(\)',
         }
-        return letters_to_leet[letter]
-
-    except Exception:
-        return word
+    return letters_to_leet.get(letter, letter)
+        
 
 
 def reverse_leet(word):
