@@ -90,7 +90,7 @@ async def links():
     )
 
 
-@bot.command(description='издевательство над людьми')
+@bot.command(description='Издевательство над людьми')
 async def leet(*args):
     original_phrase = ' '.join(args).lower()
     translated_phrase = "".join([leet_translate(letter) for letter in original_phrase])
