@@ -6,7 +6,7 @@ import random
 from discord.ext import commands
 from .utils import start_background_tasks, format_quote, is_night
 from .twitter_quoter import TwitterQuoter
-from .leet_translate import leet_translate
+from .leet_translate import translate_letter_to_leet
 
 
 bot = commands.Bot(
@@ -93,8 +93,8 @@ async def links():
 @bot.command(description='Издевательство над людьми')
 async def leet(*args):
     original_phrase = ' '.join(args).lower()
-    translated_phrase = "".join([leet_translate(letter) for letter in original_phrase])
-    await bot.say(f'`{word}`')
+    translated_phrase = "".join([translate_letter_to_leet(letter) for letter in original_phrase])
+    await bot.say(f'`{translated_phrase}`')
 
 
 """         

@@ -9,6 +9,7 @@ import markovify
 class Markov:
     def __init__(self, bot):
         self.bot = bot
+        current_file = os.path.dirname(os.path.abspath(__file__))
         data_folder = Path(current_file).parent / 'data'
         text_paths = [
             'mim.txt',
@@ -25,14 +26,14 @@ class Markov:
             'horn.txt',
             'komm.txt',
             'larosh.txt',
-            'eterna.txt'
+#            'eterna.txt'
             ]
-    models = []
-    for text_path in text_paths:
-        with open(data_folder / text_path) as text:
-            models.append(markovify.NewlineText(text, state_size=3))
-    weights = [43, 80, 33, 15, 80, 25, 6.7, 4, 8, 33, 2, 2.3, 15, 117, 1]
-    self.model = markovify.combine(models, weights)
+        models = []
+        for text_path in text_paths:
+            with open(data_folder / text_path) as text:
+                models.append(markovify.NewlineText(text, state_size=3))
+        weights = [43, 80, 33, 15, 80, 25, 6.7, 4, 8, 33, 2, 2.3, 15, 117]
+        self.model = markovify.combine(models, weights)
 
 
     async def on_message(self, message):
