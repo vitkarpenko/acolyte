@@ -53,12 +53,12 @@ class Poll(commands.Cog):
             context.me.id
         ]  # add the bot's ID to the list of voters to exclude it's votes
 
-        tally = {x: 0 for x in options.keys()}
+        tally = {x: 0 for x in options.values()}
         for reaction in poll_message.reactions:
             if reaction.emoji in options.keys():
                 async for reactor in reaction.users():
                     if reactor.id not in voters:
-                        tally[reaction.emoji] += 1
+                        tally[options[reaction.emoji]] += 1
                         voters.append(reactor.id)
 
         results = sorted(tally.items(), key=operator.itemgetter(1), reverse=True)
