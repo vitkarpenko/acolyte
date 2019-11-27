@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  acolyte:
+    build:
+      context: .
+    image: acolyte:${COMMIT}
+    depends_on:
+      - cbsgen
+    environment:
+      - ACOLYTE_TWITTER_CONSUMER_KEY=${ACOLYTE_TWITTER_CONSUMER_KEY}
+      - ACOLYTE_TWITTER_CONSUMER_SECRET=${ACOLYTE_TWITTER_CONSUMER_SECRET}
+      - ACOLYTE_TWITTER_ACCESS_TOKEN_KEY=${ACOLYTE_TWITTER_ACCESS_TOKEN_KEY}
+      - ACOLYTE_TWITTER_ACCESS_TOKEN_SECRET=${ACOLYTE_TWITTER_ACCESS_TOKEN_SECRET}
+      - ACOLYTE_DISCORD_TOKEN=${ACOLYTE_DISCORD_TOKEN}
+    ports:
+      - 8020:8020
+  cbsgen:
+    image: dmevdok/cbsgen:latest
