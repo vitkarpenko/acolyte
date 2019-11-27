@@ -1,10 +1,10 @@
 FROM python:3.7-slim-buster
 RUN apt-get update \
-    && apt-get upgrade
+    && apt-get upgrade -y
 
 COPY requirements.txt /app/
 WORKDIR /app
 RUN pip3 install --upgrade -r requirements.txt
-COPY ./app
+COPY . /app
 
 CMD ["python", "main.py"]
