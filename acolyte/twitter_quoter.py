@@ -1,19 +1,19 @@
 import os
 
-import twitter
 import requests
+import twitter
 from bs4 import BeautifulSoup
 
 
 class TwitterQuoter:
     def __init__(self):
         self.twitter = twitter.Api(
-            consumer_key='XFRqXC0pOEgIas4QVb4vQFyTz',
-            consumer_secret='CpVf0x3lFRr0XHUnWaOCcpApT17AmFBsq6Ib4tZoKCHQqH7FOQ',
-            access_token_key='734460717303271425-0afYAgCMqPozfioZ6CuBLqQc4yj7wqA',
-            access_token_secret='uzooK4vC8Vg6jZCJgDoklmxuGKQuFYvLi4FafRcVSmFTd',
+            consumer_key="XFRqXC0pOEgIas4QVb4vQFyTz",
+            consumer_secret="CpVf0x3lFRr0XHUnWaOCcpApT17AmFBsq6Ib4tZoKCHQqH7FOQ",
+            access_token_key="734460717303271425-0afYAgCMqPozfioZ6CuBLqQc4yj7wqA",
+            access_token_secret="uzooK4vC8Vg6jZCJgDoklmxuGKQuFYvLi4FafRcVSmFTd",
         )
-        self.username = 'karpenko_vitaly'
+        self.username = "karpenko_vitaly"
         self.tweets = self.fetch_latest_tweets()
 
     def fetch_updates_ids(self):
@@ -33,11 +33,11 @@ class TwitterQuoter:
     def find_kindle_quotes(self, message):
         text = message.text
         last_word = text.split()[-1]
-        if not last_word.startswith('https://t.co/'):
+        if not last_word.startswith("https://t.co/"):
             return None
         r = requests.get(last_word)
-        parser = BeautifulSoup(r.text, 'lxml')
-        quote = parser.find(id='kp-quote')
+        parser = BeautifulSoup(r.text, "lxml")
+        quote = parser.find(id="kp-quote")
         if quote:
             return quote.string.strip(' \t\n"')
         else:

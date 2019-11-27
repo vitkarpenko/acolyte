@@ -15,4 +15,4 @@ def is_night():
 
 
 def format_quote(quote):
-    return f'**Виталий цитирует**:\n_{quote}_'
+    return f"**Виталий цитирует**:\n_{quote}_"

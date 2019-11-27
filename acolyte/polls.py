@@ -13,25 +13,25 @@ class Poll:
     @commands.command(pass_context=True)
     async def poll(self, ctx, question, *options: str):
         if len(options) <= 1:
-            await self.bot.say('Пустые голосования не принимаются.')
+            await self.bot.say("Пустые голосования не принимаются.")
             return
         if len(options) > 9:
-            await self.bot.say('Давай ограничимся девятью вариантами.')
+            await self.bot.say("Давай ограничимся девятью вариантами.")
             return
 
-        if len(options) == 2 and options[0] == 'да' and options[1] == 'нет':
-            reactions = ['✅', '❌']
+        if len(options) == 2 and options[0] == "да" and options[1] == "нет":
+            reactions = ["✅", "❌"]
         else:
-            reactions = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣']
+            reactions = ["1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣"]
 
         description = []
         for x, option in enumerate(options):
-            description += '\n{} {}'.format(reactions[x], option)
-        embed = discord.Embed(title=question, description=''.join(description))
+            description += "\n{} {}".format(reactions[x], option)
+        embed = discord.Embed(title=question, description="".join(description))
         react_message = await self.bot.say(embed=embed)
         for reaction in reactions[: len(options)]:
             await self.bot.add_reaction(react_message, reaction)
-        embed.set_footer(text='ID голосования: {}'.format(react_message.id))
+        embed.set_footer(text="ID голосования: {}".format(react_message.id))
         await self.bot.edit_message(react_message, embed=embed)
 
     @commands.command(pass_context=True)
@@ -42,12 +42,12 @@ class Poll:
         embed = poll_message.embeds[0]
         if poll_message.author != ctx.message.server.me:
             return
-        if not embed['footer']['text'].startswith('ID голосования:'):
+        if not embed["footer"]["text"].startswith("ID голосования:"):
             return
-        unformatted_options = [x.strip() for x in embed['description'].split('\n')]
+        unformatted_options = [x.strip() for x in embed["description"].split("\n")]
         options = (
             {x[:2]: x[3:] for x in unformatted_options}
-            if unformatted_options[0][0] == '1'
+            if unformatted_options[0][0] == "1"
             else {x[:1]: x[2:] for x in unformatted_options}
         )
         # check if we're using numbers for the poll, or x/checkmark, parse accordingly
@@ -65,9 +65,9 @@ class Poll:
                         voters.append(reactor.id)
 
         results = sorted(tally.items(), key=operator.itemgetter(1), reverse=True)
-        output = 'Результаты голосования "{}":\n'.format(embed['title']) + '\n'.join(
+        output = 'Результаты голосования "{}":\n'.format(embed["title"]) + "\n".join(
             [
-                '**{}**: {}'.format(result[0], '\U0001F4A0' * result[1])
+                "**{}**: {}".format(result[0], "\U0001F4A0" * result[1])
                 for result in results
             ]
         )
