@@ -11,3 +11,5 @@ check:
 	isort --check --diff
 	black . --check --diff
 
+run:
+	python main.py

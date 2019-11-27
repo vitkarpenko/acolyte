@@ -4,13 +4,16 @@ from pathlib import Path
 
 import discord
 import markovify
+from discord.ext import commands
 
 
-class Markov:
+class Markov(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        data_folder = Path(current_file).parent / "data"
-        text_paths = [
+        self.data_folder = (
+            Path(os.path.dirname(os.path.abspath(__file__))).parent / "data"
+        )
+        self.text_paths = [
             "mim.txt",
             "fallout.txt",
             "parsDeva.txt",
@@ -28,12 +31,12 @@ class Markov:
             "eterna.txt",
         ]
 
-    models = []
-    for text_path in text_paths:
-        with open(data_folder / text_path) as text:
-            models.append(markovify.NewlineText(text, state_size=3))
-    weights = [43, 80, 33, 15, 80, 25, 6.7, 4, 8, 33, 2, 2.3, 15, 117, 1]
-    self.model = markovify.combine(models, weights)
+        models = []
+        for text_path in self.text_paths:
+            with open(self.data_folder / text_path) as text:
+                models.append(markovify.NewlineText(text, state_size=3))
+        weights = [43, 80, 33, 15, 80, 25, 6.7, 4, 8, 33, 2, 2.3, 15, 117, 1]
+        self.model = markovify.combine(models, weights)
 
     async def on_message(self, message):
         if self.bot.user.mentioned_in(message):

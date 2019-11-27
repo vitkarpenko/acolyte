@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 
 
-class Poll:
+class Poll(commands.Cog):
     """Создание голосовалок."""
 
     def __init__(self, bot):
