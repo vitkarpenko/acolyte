@@ -57,31 +57,31 @@ Commands.
 
 
 @bot.command(description="This is how I roll... *XdY*.")
-async def roll(dice):
+async def roll(context, dice):
     try:
         rolls, limit = map(int, dice.split("d"))
     except Exception:
-        await bot.say("**XdY**, просил же!")
+        await context.send("**XdY**, просил же!")
         return
     if rolls > 200:
-        await bot.say("У меня нет столько кубиков.")
+        await context.send("У меня нет столько кубиков.")
         return
     if rolls * limit > 1_000_000:
-        await bot.say("Так, экспериментатор, зачехляй свой коллайдер!")
+        await context.send("Так, экспериментатор, зачехляй свой коллайдер!")
         return
     rolls = [random.randint(1, limit) for r in range(rolls)]
     comma_separated_rolls = ", ".join(str(roll) for roll in rolls)
-    await bot.say(f"**Выпало**: {comma_separated_rolls}\n**Сумма**: {sum(rolls)}")
+    await context.send(f"**Выпало**: {comma_separated_rolls}\n**Сумма**: {sum(rolls)}")
 
 
 @bot.command(description="Помощь нерешительным!")
-async def choice(*args):
-    await bot.say(f"**Выбрано**: {random.choice(args)}")
+async def choice(context, *args):
+    await context.send(f"**Выбрано**: {random.choice(args)}")
 
 
 @bot.command(description="Поможем склеротикам")
-async def links():
-    await bot.say(
+async def links(context):
+    await context.send(
         "**Github**:\n\tОбитатель - https://github.com/vitkarpenko\n\tЗачинателя - https://github.com/Dairiss\n\t"
         "Раздражитель - https://github.com/Valhen-otto\n\tДля братишек - https://github.com/deeppomf/DeepCreamPy\n"
         "**Twitter**:\n\tВитика - https://twitter.com/karpenko_vitaly\n\t"
@@ -91,16 +91,16 @@ async def links():
 
 
 @bot.command(description="Издевательство над людьми")
-async def leet(*args):
+async def leet(context, *args):
     original_phrase = " ".join(args).lower()
     translated_phrase = "".join(
         [translate_letter_to_leet(letter) for letter in original_phrase]
     )
-    await bot.say(f"`{translated_phrase}`")
+    await context.send(f"`{translated_phrase}`")
 
 
 """         
 Cogs.
 """
 bot.load_extension("acolyte.polls")
-bot.load_extension("acolyte.markov")
+# bot.load_extension("acolyte.markov")
