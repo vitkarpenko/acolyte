@@ -19,8 +19,8 @@ current_file = os.path.dirname(os.path.abspath(__file__))
 with open(Path(current_file).parent / "data" / "quotes.txt") as quotes_file:
     QUOTES = [quote.strip() for quote in quotes_file]
 
-BOOKS_ID = "405339907012427779"
-FLOOD_ID = "405287350734815233"
+BOOKS_ID = 405339907012427779
+FLOOD_ID = 405287350734815233
 
 
 """
@@ -34,7 +34,8 @@ async def post_updates_to_discord():
     for update in updates:
         quote = twitter.find_kindle_quotes(update)
         if quote:
-            await bot.send_message(bot.get_channel(BOOKS_ID), format_quote(quote))
+            channel = bot.get_channel(BOOKS_ID)
+            await channel.send(format_quote(quote))
 
 
 async def post_quotes():
