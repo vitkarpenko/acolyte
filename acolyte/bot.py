@@ -82,7 +82,7 @@ async def choice(context, *args):
 @bot.command(description="Поможем склеротикам")
 async def links(context):
     await context.send(
-        "**Github**:\n\tОбитатель - https://github.com/vitkarpenko\n\tЗачинателя - https://github.com/Dairiss\n\t"
+        "**Github**:\n\tЦенитель - https://github.com/vitkarpenko\n\tЗачинателя - https://github.com/Dairiss\n\t"
         "Раздражитель - https://github.com/Valhen-otto\n\tДля братишек - https://github.com/deeppomf/DeepCreamPy\n"
         "**Twitter**:\n\tВитика - https://twitter.com/karpenko_vitaly\n\t"
         "Иры - https://twitter.com/Valhen_Otto\n"
