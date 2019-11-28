@@ -2,6 +2,7 @@ import os
 import random
 from pathlib import Path
 
+from aiohttp import ClientSession
 from discord.ext import commands
 
 from .leet_translate import translate_letter_to_leet
@@ -12,6 +13,8 @@ bot = commands.Bot(
     command_prefix="!",
     description="За Кейли, двигатель и новый способ атомного бражения!",
 )
+brain_session = ClientSession()
+bot.brain = brain_session
 
 twitter = TwitterQuoter()
 
@@ -103,4 +106,5 @@ async def leet(context, *args):
 Cogs.
 """
 bot.load_extension("acolyte.polls")
+bot.load_extension("acolyte.brain")
 # bot.load_extension("acolyte.markov")

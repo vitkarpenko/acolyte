@@ -6,14 +6,21 @@ services:
       context: .
     image: acolyte:${COMMIT}
     depends_on:
-      - cbsgen
+      - brain
     environment:
       - ACOLYTE_TWITTER_CONSUMER_KEY=${ACOLYTE_TWITTER_CONSUMER_KEY}
       - ACOLYTE_TWITTER_CONSUMER_SECRET=${ACOLYTE_TWITTER_CONSUMER_SECRET}
       - ACOLYTE_TWITTER_ACCESS_TOKEN_KEY=${ACOLYTE_TWITTER_ACCESS_TOKEN_KEY}
       - ACOLYTE_TWITTER_ACCESS_TOKEN_SECRET=${ACOLYTE_TWITTER_ACCESS_TOKEN_SECRET}
       - ACOLYTE_DISCORD_TOKEN=${ACOLYTE_DISCORD_TOKEN}
-    ports:
-      - 8020:8020
-  cbsgen:
+    networks:
+      - bot_network
+  brain:
     image: dmevdok/cbsgen:latest
+    ports:
+      - 80:8080
+    networks:
+      - bot_network
+
+networks:
+  bot_network:
