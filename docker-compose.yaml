@@ -17,8 +17,9 @@ services:
       - bot_network
   brain:
     image: dmevdok/cbsgen:latest
-    ports:
-      - 80:8080
+    container_name: brain
+    expose:
+      - 8080
     networks:
       - bot_network
 

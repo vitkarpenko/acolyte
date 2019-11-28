@@ -8,11 +8,11 @@ class Brain(Cog):
     @Cog.listener()
     async def on_message(self, message):
         text = message.content
-        await self.bot.brain.post('http://brain/train', data=text)
+        await self.bot.brain.post('http://brain:8080/train', data=text)
 
     @command()
     async def speak(self, context):
-        response = await self.bot.brain.get('http://brain/test')
+        response = await self.bot.brain.get('http://brain:8080/test')
         await context.send(await response.text())
 
 
