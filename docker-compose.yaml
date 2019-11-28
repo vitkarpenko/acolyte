@@ -22,6 +22,8 @@ services:
       - 8080
     networks:
       - bot_network
+    volumes:
+      - ${PWD}/brain/model.pth:/home/service/model.pth
 
 networks:
   bot_network:
