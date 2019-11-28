@@ -37,13 +37,17 @@ class Brain(Cog):
             seconds_passed = STATE_CHECK_STEPS * STATE_CHECK_TIMEOUT
             messages_processed = states[0]['queue_size'] - current_queue_size
             processing_speed = messages_processed / seconds_passed
-            output = "\n".join(
-                [
-                    f':cyclone: **ЦПУ**: *{mean_cpu}%*',
-                    f':closed_book: **Память**: *{mean_ram}%*',
-                    f':chains: **В очереди**: *{current_queue_size}*',
-                    f':recycle: **Скорость обработки**: *{processing_speed}/с*',
-                ]
+            output = (
+                '```\n'
+                + "\n".join(
+                    [
+                        f'\U0001F300 ЦПУ: {mean_cpu}%',
+                        f'\U0001F4D5 Память: {mean_ram}%',
+                        f'\U000026D3 В очереди: {current_queue_size}',
+                        f'\U0001F3C3 Скорость обработки: {processing_speed}/с',
+                    ]
+                )
+                + '\n```'
             )
         else:
             response = await self.bot.brain.get('http://brain:8080/test')
