@@ -63,10 +63,10 @@ class Poll(commands.Cog):
 
         results = sorted(tally.items(), key=operator.itemgetter(1), reverse=True)
         output = (
-            'Результаты голосования "{}":\n```\n'.format(embed.title)
+            '**Результаты голосования "{}":**\n```\n'.format(embed.title)
             + "\n".join(
                 [
-                    "- {}: {}".format(result[0], "\U0001F4A0" * result[1])
+                    "- {}: {}".format(result[0], "☠️" * result[1])
                     for result in results
                 ]
             )
