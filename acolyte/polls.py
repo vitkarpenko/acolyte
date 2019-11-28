@@ -62,15 +62,13 @@ class Poll(commands.Cog):
                         voters.append(reactor.id)
 
         results = sorted(tally.items(), key=operator.itemgetter(1), reverse=True)
-        output = (
-            '**Результаты голосования "{}":**\n```\n'.format(embed.title)
-            + "\n".join(
-                [
-                    "- {}: {}".format(result[0], "☠️" * result[1])
-                    for result in results
-                ]
-            )
-            + "\n```"
+        output = '**Результаты голосования "{}":**\n'.format(embed.title) + "\n".join(
+            [
+                "- {}: {}".format(
+                    result[0], ":diamond_shape_with_a_dot_inside:" * result[1]
+                )
+                for result in results
+            ]
         )
         await context.send(output)
 
