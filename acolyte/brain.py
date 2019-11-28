@@ -44,7 +44,7 @@ class Brain(Cog):
                         f'\U0001F300 ЦПУ: {mean_cpu}%',
                         f'\U0001F4D5 Память: {mean_ram}%',
                         f'\U000026D3 В очереди: {current_queue_size}',
-                        f'\U0001F3C3 Скорость обработки: {processing_speed}/с',
+                        f'\U0001F4A8 Скорость обработки: {processing_speed}/с',
                     ]
                 )
                 + '\n```'
