@@ -24,7 +24,7 @@ services:
     networks:
       - bot_network
     volumes:
-      - ${PWD}/brain/model.pth:/home/service/model.pth
+      - ${PWD}/data:/home/service/data
 
 networks:
   bot_network:
