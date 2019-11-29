@@ -3,6 +3,7 @@ import random
 from pathlib import Path
 
 from aiohttp import ClientSession
+
 from discord.ext import commands
 
 from .leet_translate import translate_letter_to_leet

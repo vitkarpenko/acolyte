@@ -16,8 +16,9 @@ services:
     networks:
       - bot_network
   brain:
-    image: dmevdok/cbsgen:latest
+    image: cbsgen:latest
     container_name: brain
+    command: python3 /home/service/main.py pretrain
     expose:
       - 8080
     networks:

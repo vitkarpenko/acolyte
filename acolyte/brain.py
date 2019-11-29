@@ -2,9 +2,8 @@ import asyncio
 import json
 from statistics import mean
 
-from discord.ext.commands import Cog
-
 from acolyte.constants import STATE_CHECK_STEPS, STATE_CHECK_TIMEOUT
+from discord.ext.commands import Cog
 
 
 class Brain(Cog):
@@ -34,6 +33,9 @@ class Brain(Cog):
             mean_cpu = mean(state['cpu'] for state in states)
             mean_ram = mean(state['mem'] for state in states)
             current_queue_size = states[-1]['queue_size']
+            current_trained = states[-1]['trained']
+            current_loss = states[-1]['current_loss']
+            current_loss_std = states[-1]['current_loss_std']
             seconds_passed = STATE_CHECK_STEPS * STATE_CHECK_TIMEOUT
             messages_processed = states[0]['queue_size'] - current_queue_size
             processing_speed = messages_processed / seconds_passed
@@ -45,6 +47,9 @@ class Brain(Cog):
                         f'\U0001F4D5 Память: {mean_ram}%',
                         f'\U000026D3 В очереди: {current_queue_size}',
                         f'\U0001F4A8 Скорость обработки: {processing_speed}/с',
+                        f'\U0001F552 Затренено эпох: {current_trained}/с',
+                        f'\U0001F54C Лосс: {current_loss}/с',
+                        f'\U0001F54B Отклонение лосса: {current_loss_std}/с',
                     ]
                 )
                 + '\n```'
